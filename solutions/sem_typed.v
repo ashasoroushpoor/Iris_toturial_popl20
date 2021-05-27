@@ -80,7 +80,7 @@ Section sem_typed.
     env_sem_typed Γ vs -∗ ∃ v, ⌜ vs !! x = Some v ⌝ ∧ A v.
   Proof.
     iIntros (HΓx) "HΓ". rewrite /env_sem_typed.
-    by iApply (big_sepM2_lookup_1 with "HΓ").
+    by iApply (big_sepM2_lookup_l with "HΓ").
   Qed.
   Lemma env_sem_typed_insert Γ vs x A v :
     A v -∗ env_sem_typed Γ vs -∗
