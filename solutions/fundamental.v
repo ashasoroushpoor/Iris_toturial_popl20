@@ -12,7 +12,7 @@ This theorem essentially follows from the compatibility lemmas and an induction
 on the typing derivation. *)
 
 Section fundamental.
-  Context `{!heapG Σ}.
+  Context `{!heapGS Σ}.
   Implicit Types Γ : gmap string ty.
   Implicit Types τ : ty.
   Implicit Types ρ : list (sem_ty Σ).

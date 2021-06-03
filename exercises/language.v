@@ -111,7 +111,7 @@ values are closed, i.e. that substitution will not go into them. *)
 
 (** Now that we have defined our first HeapLang program, let us write a
 specification for using Iris's weakest preconditions: *)
-Lemma wp_swap `{!heapG Σ} l1 l2 v1 v2 :
+Lemma wp_swap `{!heapGS Σ} l1 l2 v1 v2 :
   l1 ↦ v1 -∗
   l2 ↦ v2 -∗
   WP swap #l1 #l2 {{ v, ⌜ v = #() ⌝ ∗ l1 ↦ v2 ∗ l2 ↦ v1 }}.
@@ -123,7 +123,7 @@ This specification already points out a number of interesting features of
 both separation logic and the Iris framework:
 
 - First, a very technical one: each Iris lemma that involves HeapLang programs,
-  should have the parameter [`{!heapG Σ}]. This has to do with Iris's generic
+  should have the parameter [`{!heapGS Σ}]. This has to do with Iris's generic
   infrastructure for handling ghost state. For now, these parameters can be
   ignored, but we will come back to them in the file [unsafe.v]. More
   information about the handling of ghost state in Iris can be found at:
@@ -220,7 +220,7 @@ Definition swap_and_add : val := λ: "l1" "l2",
   "l2" <- "x".
 
 (** The specification is as follows: *)
-Lemma wp_swap_and_add `{!heapG Σ} l1 l2 (x1 x2 : Z) :
+Lemma wp_swap_and_add `{!heapGS Σ} l1 l2 (x1 x2 : Z) :
   l1 ↦ #x1 -∗
   l2 ↦ #x2 -∗
   WP swap_and_add #l1 #l2 {{ v, ⌜ v = #() ⌝ ∗ l1 ↦ #(x1 + x2) ∗ l2 ↦ #x1 }}.
@@ -248,7 +248,7 @@ Definition twice : val := λ: "f" "x",
 only use them in the conclusions of a lemma, but also in the premises, and in
 nested ways. This is crucial to reason about higher-order functions. Let us see
 that in action to give a specification of the [twice] function. *)
-Lemma wp_twice `{!heapG Σ} (Ψ : val → iProp Σ) (vf vx : val) :
+Lemma wp_twice `{!heapGS Σ} (Ψ : val → iProp Σ) (vf vx : val) :
   WP vf vx {{ w, WP vf w {{ Ψ }} }} -∗
   WP twice vf vx {{ Ψ }}.
 
@@ -292,7 +292,7 @@ Definition add_two : val := λ: "x",
 
 (** While this function is rather convoluted, the specification is precisely
 what you would expect---it adds [2]. *)
-Lemma wp_add_two `{!heapG Σ} (x : Z) :
+Lemma wp_add_two `{!heapGS Σ} (x : Z) :
   ⊢ WP add_two #x {{ w, ⌜ w = #(2 + x) ⌝ }}.
 (** Note that this weakest precondition does not have a premise (i.e. the
 lemma does not involve a magic wand [-∗] at the top-level, as we have seen in
@@ -330,7 +330,7 @@ Definition add_two_ref : val := λ: "l",
 
 (** The specification is as expected (it follows the pattern we have seen in
 e.g. [swap_and_add]---we make use of the points-to connective [l ↦ #x]. *)
-Lemma wp_add_two_ref `{!heapG Σ} l (x : Z) :
+Lemma wp_add_two_ref `{!heapGS Σ} l (x : Z) :
   l ↦ #x -∗
   WP add_two_ref #l {{ w, ⌜ w = #() ⌝ ∗ l ↦ #(2 + x) }}%I.
 
@@ -354,7 +354,7 @@ Definition twice_ref : val := λ: "lf" "lx",
 (** The specification of [twice_ref] follows that of [twice], but it quantifies
 both over locations [lf] and [lx], and the HeapLang function [vf] and value [vx]
 that they contain, respectively. *)
-Lemma wp_twice_ref `{!heapG Σ} (Ψ : val → iProp Σ) lf lx (vf vx : val) :
+Lemma wp_twice_ref `{!heapGS Σ} (Ψ : val → iProp Σ) lf lx (vf vx : val) :
   lf ↦ vf -∗
   lx ↦ vx -∗
   WP vf vx {{ w, WP vf w {{ w', lf ↦ vf -∗ lx ↦ w' -∗ Ψ #() }} }} -∗
@@ -409,7 +409,7 @@ Definition add_two_fancy : val := λ: "x",
   twice_ref "lf" "lx";;
   !"lx".
 
-Lemma wp_add_two_fancy `{!heapG Σ} (x : Z) :
+Lemma wp_add_two_fancy `{!heapGS Σ} (x : Z) :
   ⊢ WP add_two_fancy #x {{ w, ⌜ w = #(2 + x) ⌝ }}.
 Proof.
   (* exercise *)
@@ -429,7 +429,7 @@ can still show that this function is safe by proving a specification. *)
 Definition unsafe_pure : val := λ: <>,
   if: #true then #13 else #13 #37.
 
-Lemma wp_unsafe_pure `{!heapG Σ} :
+Lemma wp_unsafe_pure `{!heapGS Σ} :
   ⊢ WP unsafe_pure #() {{ v, ⌜ v = #13 ⌝ }}.
 Proof.
   rewrite /unsafe_pure.
@@ -442,7 +442,7 @@ Qed.
 Definition unsafe_ref : val := λ: <>,
   let: "l" := ref #0 in "l" <- #true;; !"l".
 
-Lemma wp_unsafe_ref `{!heapG Σ} :
+Lemma wp_unsafe_ref `{!heapGS Σ} :
   ⊢ WP unsafe_ref #() {{ v, ⌜ v = #true ⌝ }}.
 Proof.
   (* exercise *)

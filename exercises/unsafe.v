@@ -2,7 +2,7 @@ From exercises Require Export sem_typed.
 From exercises Require Import symbol_ghost two_state_ghost.
 
 Section unsafe.
-  Context `{!heapG Σ}.
+  Context `{!heapGS Σ}.
 
   (** Recall the following function we defined in the file [language.v]:
   <<

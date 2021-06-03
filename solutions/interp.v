@@ -8,7 +8,7 @@ in [τ]), we need to keep track of their corresponding semantic types. We
 represent these semantic types as a list, since de use De Bruijn indices for
 type variables. *)
 Reserved Notation "⟦ τ ⟧".
-Fixpoint interp `{!heapG Σ} (τ : ty) (ρ : list (sem_ty Σ)) : sem_ty Σ :=
+Fixpoint interp `{!heapGS Σ} (τ : ty) (ρ : list (sem_ty Σ)) : sem_ty Σ :=
   match τ return _ with
   | TVar x => default () (ρ !! x) (* dummy in case [x ∉ ρ] *)
   | TUnit => ()
@@ -27,7 +27,7 @@ Instance: Params (@interp) 2 := {}.
 
 (** We now lift the interpretation of types to typing contexts. This is done in
 a pointwise fashion using the [<$> : (A → B) → gmap K A → gmap K B] operator. *)
-Definition interp_env `{!heapG Σ} (Γ : gmap string ty)
+Definition interp_env `{!heapGS Σ} (Γ : gmap string ty)
   (ρ : list (sem_ty Σ)) : gmap string (sem_ty Σ) := flip interp ρ <$> Γ.
 Instance: Params (@interp_env) 3 := {}.
 
@@ -36,7 +36,7 @@ including important lemmas about the effect that lifting (de Bruijn indices)
 and substitution in type level variables have on the interpretation of syntactic
 types and typing contexts. *)
 Section interp_properties.
-  Context `{!heapG Σ}.
+  Context `{!heapGS Σ}.
   Implicit Types Γ : gmap string ty.
   Implicit Types τ : ty.
   Implicit Types ρ : list (sem_ty Σ).

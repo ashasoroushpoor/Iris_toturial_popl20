@@ -38,7 +38,7 @@ Definition sem_ty_sum {Σ} (A1 A2 : sem_ty Σ) : sem_ty Σ := SemTy (λ w,
 
 (** * Functions *)
 (** The semantic type former for functions is as follows: *)
-Definition sem_ty_arr `{!heapG Σ} (A1 A2 : sem_ty Σ) : sem_ty Σ := SemTy (λ w,
+Definition sem_ty_arr `{!heapGS Σ} (A1 A2 : sem_ty Σ) : sem_ty Σ := SemTy (λ w,
   □ ∀ v, A1 v -∗ WP App w v {{ A2 }})%I.
 (** This definition is very close to the usual way of defining the type
 former for the function type [A1 → A2] in traditional logical relations: it
@@ -55,7 +55,7 @@ semantic type [A2]. The definition makes two of two features of Iris:
 *)
 
 (** * Polymorphism and existentials *)
-Definition sem_ty_forall `{!heapG Σ} (C : sem_ty Σ → sem_ty Σ) : sem_ty Σ := SemTy (λ w,
+Definition sem_ty_forall `{!heapGS Σ} (C : sem_ty Σ → sem_ty Σ) : sem_ty Σ := SemTy (λ w,
   □ ∀ A : sem_ty Σ, WP w <_> {{ w, C A w }})%I.
 Definition sem_ty_exist {Σ} (C : sem_ty Σ → sem_ty Σ) : sem_ty Σ := SemTy (λ w,
   ∃ A : sem_ty Σ, C A w)%I.
@@ -83,7 +83,7 @@ evaluated until they are applied to a specific type. *)
 
 (** * References *)
 Definition tyN := nroot .@ "ty".
-Definition sem_ty_ref `{!heapG Σ} (A : sem_ty Σ) : sem_ty Σ := SemTy (λ w,
+Definition sem_ty_ref `{!heapGS Σ} (A : sem_ty Σ) : sem_ty Σ := SemTy (λ w,
   ∃ l : loc, ⌜w = #l⌝ ∧ inv (tyN .@ l) (∃ v, l ↦ v ∗ A v))%I.
 (** Intuitively, values of the reference type [sem_ty_ref A] should be locations
 [l] that hold a value [w] in the semantic type [A] at all times. In order to
@@ -191,7 +191,7 @@ Instance: Params (@sem_ty_rec) 1 := {}.
 (** We prove that all type formers are non-expansive and respect setoid
 equality. This code is mostly boilerplate. *)
 Section types_properties.
-  Context `{!heapG Σ}.
+  Context `{!heapGS Σ}.
 
   Global Instance sem_ty_prod_ne : NonExpansive2 (@sem_ty_prod Σ).
   Proof. solve_proper. Qed.

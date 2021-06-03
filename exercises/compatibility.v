@@ -23,7 +23,7 @@ becomes:
 *)
 
 Section compatibility.
-  Context `{!heapG Σ}.
+  Context `{!heapGS Σ}.
   Implicit Types A B : sem_ty Σ.
   Implicit Types C : sem_ty Σ → sem_ty Σ.
 

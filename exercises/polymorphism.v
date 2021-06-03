@@ -53,7 +53,7 @@ Definition swap_poly : val := Λ: λ: "l1" "l2",
   "l2" <- "x".
 
 (** Prove the following specification. *)
-Lemma wp_swap_poly `{!heapG Σ} l1 l2 v1 v2 :
+Lemma wp_swap_poly `{!heapGS Σ} l1 l2 v1 v2 :
   l1 ↦ v1 -∗
   l2 ↦ v2 -∗
   WP swap_poly <_> #l1 #l2 {{ v, ⌜ v = #() ⌝ ∗ l1 ↦ v2 ∗ l2 ↦ v1 }}.
