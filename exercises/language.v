@@ -249,7 +249,7 @@ only use them in the conclusions of a lemma, but also in the premises, and in
 nested ways. This is crucial to reason about higher-order functions. Let us see
 that in action to give a specification of the [twice] function. *)
 Lemma wp_twice `{!heapGS Σ} (Ψ : val → iProp Σ) (vf vx : val) :
-  WP vf vx {{ w, WP vf w {{ Ψ }} }} -∗
+  WP vf vx {{ w, WP vf (of_val w) {{ Ψ }} }} -∗
   WP twice vf vx {{ Ψ }}.
 
 (** This lemma is quite a mouthful. First, it quantifies over an arbitrary
@@ -357,7 +357,7 @@ that they contain, respectively. *)
 Lemma wp_twice_ref `{!heapGS Σ} (Ψ : val → iProp Σ) lf lx (vf vx : val) :
   lf ↦ vf -∗
   lx ↦ vx -∗
-  WP vf vx {{ w, WP vf w {{ w', lf ↦ vf -∗ lx ↦ w' -∗ Ψ #() }} }} -∗
+  WP vf vx {{ w, WP vf (of_val w) {{ w', lf ↦ vf -∗ lx ↦ w' -∗ Ψ #() }} }} -∗
   WP twice_ref #lf #lx {{ Ψ }}.
 (** The postcondition of the weakest precondition in the premise is somewhat
 more complicated. It makes use of the magic wand [-∗] to give back ownership of
