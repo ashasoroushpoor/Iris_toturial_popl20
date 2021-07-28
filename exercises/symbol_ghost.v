@@ -1,6 +1,6 @@
 From iris.algebra Require Import auth numbers.
 From iris.base_logic Require Import lib.own.
-From iris.proofmode Require Export tactics.
+From iris.proofmode Require Export proofmode.
 
 (** * Ghost theory for the [unsafe_symbol_adt] exercise *)
 (** This file defines the ghost resources [counter] and [symbol] using Iris's

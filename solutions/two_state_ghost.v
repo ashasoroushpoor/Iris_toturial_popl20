@@ -1,6 +1,6 @@
 From iris.algebra Require Import auth.
 From iris.base_logic Require Import lib.own.
-From iris.proofmode Require Export tactics.
+From iris.proofmode Require Export proofmode.
 
 (** * Ghost theory for the [unsafe_ref_reuse] exercise *)
 (** This file defines the ghost resources [two_state_auth] and [two_state_final]
