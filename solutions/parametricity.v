@@ -100,7 +100,7 @@ Section parametricity.
     rtc erased_step ([e <_> vf vz]%E, σ) (of_val w :: es, σ') → φ w.
   (* SOLUTION *) Proof.
     intros He.
-    apply sem_gen_type_safety with (φ0 := φ)=> ?.
+    apply (sem_gen_type_safety _ _ φ)=> ?.
     set (T := SemTy (λ w, ⌜ φ w ⌝)%I : sem_ty Σ).
     exists T. split; first done.
     specialize (He _) as (Φ & He & Hvf & Hvz & Hφ).
