@@ -101,7 +101,7 @@ express this intuition in a formal way, we make use of two features of Iris:
 (** * Recursive types *)
 Definition sem_ty_rec_pre {Σ} (C : sem_ty Σ → sem_ty Σ)
   (rec : sem_ty Σ) : sem_ty Σ := SemTy (λ v, ▷ ∃ rec', rec ≡ rec' ∧ C rec' v)%I.
-Instance sem_ty_rec_pre_contractive {Σ} (C : sem_ty Σ → sem_ty Σ) :
+Global Instance sem_ty_rec_pre_contractive {Σ} (C : sem_ty Σ → sem_ty Σ) :
   Contractive (sem_ty_rec_pre C).
 Proof. solve_contractive. Qed.
 Definition sem_ty_rec {Σ} (C : sem_ty Σ → sem_ty Σ) : sem_ty Σ :=
@@ -180,13 +180,13 @@ Notation "'μ' A , C" := (sem_ty_rec (λ A, C)) (at level 200) : sem_ty_scope.
 (** A [Params t n] instance tells Coq's setoid rewriting mechanism *not* to
 rewrite in the first [n] arguments of [t]. These instances tend to make the
 setoid rewriting mechanism a lot faster. This code is mostly boilerplate. *)
-Instance: Params (@sem_ty_prod) 1 := {}.
-Instance: Params (@sem_ty_sum) 1 := {}.
-Instance: Params (@sem_ty_arr) 1 := {}.
-Instance: Params (@sem_ty_forall) 2 := {}.
-Instance: Params (@sem_ty_exist) 1 := {}.
-Instance: Params (@sem_ty_ref) 2 := {}.
-Instance: Params (@sem_ty_rec) 1 := {}.
+Global Instance: Params (@sem_ty_prod) 1 := {}.
+Global Instance: Params (@sem_ty_sum) 1 := {}.
+Global Instance: Params (@sem_ty_arr) 1 := {}.
+Global Instance: Params (@sem_ty_forall) 2 := {}.
+Global Instance: Params (@sem_ty_exist) 1 := {}.
+Global Instance: Params (@sem_ty_ref) 2 := {}.
+Global Instance: Params (@sem_ty_rec) 1 := {}.
 
 (** We prove that all type formers are non-expansive and respect setoid
 equality. This code is mostly boilerplate. *)

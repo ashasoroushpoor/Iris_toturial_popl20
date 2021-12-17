@@ -23,7 +23,7 @@ Inductive ty_unboxed : ty → Prop :=
 [ty_unboxed] into a type class, and turn the constructors into type class
 instances. This is done using the following commands. *)
 Existing Class ty_unboxed.
-Existing Instances TUnit_unboxed TBool_unboxed TInt_unboxed TRef_unboxed.
+Global Existing Instances TUnit_unboxed TBool_unboxed TInt_unboxed TRef_unboxed.
 
 (** We can now use Coq's type class inference mechanism to automatically
 establish that given types are unboxed. This is done by invoking the [apply _]
@@ -42,7 +42,7 @@ Inductive ty_un_op : un_op → ty → ty → Prop :=
   | Ty_un_op_int op : ty_un_op op TInt TInt
   | Ty_un_op_bool : ty_un_op NegOp TBool TBool.
 Existing Class ty_un_op.
-Existing Instances Ty_un_op_int Ty_un_op_bool.
+Global Existing Instances Ty_un_op_int Ty_un_op_bool.
 
 (** The relation [ty_bin_op op τ1 τ2 σ] expresses that a binary operator [op]
 with arguments of type [τ1] and [τ2] has result type [σ]. In order to avoid
@@ -62,7 +62,7 @@ Inductive ty_bin_op : bin_op → ty → ty → ty → Prop :=
   | Ty_bin_op_bool op :
      TCElemOf op [AndOp; OrOp; XorOp] → ty_bin_op op TBool TBool TBool.
 Existing Class ty_bin_op.
-Existing Instances Ty_bin_op_eq Ty_bin_op_arith Ty_bin_op_compare Ty_bin_op_bool.
+Global Existing Instances Ty_bin_op_eq Ty_bin_op_arith Ty_bin_op_compare Ty_bin_op_bool.
 
 (** * The typing judgment *)
 (** With the above helpers at hand, we can define the syntactic typing judgment

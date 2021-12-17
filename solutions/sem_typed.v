@@ -18,20 +18,20 @@ types described by [Γ]. This notion is defined as follows:
 Definition env_sem_typed `{!heapGS Σ} (Γ : gmap string (sem_ty Σ))
     (vs : gmap string val) : iProp Σ :=
   ([∗ map] i ↦ A;v ∈ Γ; vs, sem_ty_car A v)%I.
-Instance: Params (@env_sem_typed) 2 := {}.
+Global Instance: Params (@env_sem_typed) 2 := {}.
 
 (** The semantics typing judgment. *)
 Definition sem_typed `{!heapGS Σ}
     (Γ : gmap string (sem_ty Σ)) (e : expr) (A : sem_ty Σ) : iProp Σ :=
   tc_opaque (□ ∀ vs,
     env_sem_typed Γ vs -∗ WP subst_map vs e {{ A }})%I.
-Instance: Params (@sem_typed) 2 := {}.
+Global Instance: Params (@sem_typed) 2 := {}.
 Notation "Γ ⊨ e : A" := (sem_typed Γ e A)
   (at level 74, e, A at next level) : bi_scope.
 
 Definition sem_val_typed `{!heapGS Σ} (v : val) (A : sem_ty Σ) : iProp Σ :=
   tc_opaque (A v).
-Instance: Params (@sem_val_typed) 3 := {}.
+Global Instance: Params (@sem_val_typed) 3 := {}.
 Notation "⊨ᵥ v : A" := (sem_val_typed v A)
   (at level 20, v, A at next level) : bi_scope.
 Arguments sem_val_typed : simpl never.

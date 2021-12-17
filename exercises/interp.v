@@ -23,13 +23,13 @@ Fixpoint interp `{!heapGS Σ} (τ : ty) (ρ : list (sem_ty Σ)) : sem_ty Σ :=
   | TRec τ => μ X, ⟦ τ ⟧ (X :: ρ)
   end%sem_ty
 where "⟦ τ ⟧" := (interp τ).
-Instance: Params (@interp) 2 := {}.
+Global Instance: Params (@interp) 2 := {}.
 
 (** We now lift the interpretation of types to typing contexts. This is done in
 a pointwise fashion using the [<$> : (A → B) → gmap K A → gmap K B] operator. *)
 Definition interp_env `{!heapGS Σ} (Γ : gmap string ty)
   (ρ : list (sem_ty Σ)) : gmap string (sem_ty Σ) := flip interp ρ <$> Γ.
-Instance: Params (@interp_env) 3 := {}.
+Global Instance: Params (@interp_env) 3 := {}.
 
 (** Below we prove several useful lemmas about [interp] and [interp_env],
 including important lemmas about the effect that lifting (de Bruijn indices)

@@ -47,7 +47,7 @@ Arguments sem_ty_car {_} _ _ : simpl never.
 (** Iris uses the type class [Persistent] to capture which propositions are
 persistent. Record fields are not automatically declared as instances, so we
 do that by hand. *)
-Existing Instance sem_ty_persistent.
+Global Existing Instance sem_ty_persistent.
 
 (** To obtain nice notations for the semantic types (as we will see in the file
 [sem_type_formers.v]), we create a notation scope [sem_ty_scope] for semantic
