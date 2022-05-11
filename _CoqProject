@@ -1,6 +1,5 @@
 -Q solutions solutions
 -Q exercises exercises
--docroot tutorial-popl21
 INSTALLDEFAULTROOT = tutorial-popl20
 
 # Fixing this requires Coq 8.15.
