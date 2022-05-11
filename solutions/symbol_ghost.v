@@ -61,4 +61,4 @@ Section symbol_ghost.
   Qed.
 End symbol_ghost.
 
-Typeclasses Opaque counter symbol.
+Global Typeclasses Opaque counter symbol.
