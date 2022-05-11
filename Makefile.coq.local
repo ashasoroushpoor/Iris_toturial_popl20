@@ -6,8 +6,12 @@ exercises: $(EXERCISES)
 .PHONY: exercises
 
 $(EXERCISES): exercises/%.v: solutions/%.v gen-exercises.awk
-	$(HIDE)echo "Generating exercise file $@ from $<"
-	$(HIDE)gawk -f gen-exercises.awk < $< > $@
+	$(HIDE)if test -f $@ && ! git diff --exit-code $@ >/dev/null; then \
+	  echo "Exercise file $@ has been changed; skipping exercise generation"; \
+	else \
+	  echo "Generating exercise file $@ from $<"; \
+	  gawk -f gen-exercises.awk < $< > $@; \
+	fi
 
 # CI make target
 ci: all
