@@ -2,6 +2,9 @@
 -Q exercises exercises
 INSTALLDEFAULTROOT = tutorial-popl20
 
+# Fixing this requires Coq 8.15.
+-arg -w -arg -deprecated-typeclasses-transparency-without-locality
+
 solutions/language.v
 solutions/polymorphism.v
 solutions/types.v
