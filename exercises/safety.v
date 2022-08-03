@@ -24,7 +24,7 @@ Lemma sem_gen_type_safety `{!heapGpreS Σ} e σ φ :
   (∀ `{!heapGS Σ}, ∃ A : sem_ty Σ, (∀ v, A v -∗ ⌜φ v⌝) ∧ ⊢ ∅ ⊨ e : A) →
   adequate NotStuck e σ (λ v σ, φ v).
 Proof.
-  intros Hty. apply (heap_adequacy Σ NotStuck e σ)=> // ??.
+  intros Hty. apply (heap_adequacy Σ NotStuck e σ)=> // ?.
   specialize (Hty _) as (A & HA & Hty).
   iStartProof. iDestruct (Hty $! ∅) as "#He".
   iSpecialize ("He" with "[]"); first by rewrite /env_sem_typed.
