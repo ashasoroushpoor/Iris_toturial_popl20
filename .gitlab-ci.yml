@@ -35,12 +35,6 @@ build-coq.8.17.0:
     OPAM_PINS: "coq version 8.17.0"
     #DENY_WARNINGS: "1" # coq_makefile warning cannot be resolved while supporting Coq 8.14
 
-build-coq.8.14.1:
-  <<: *template
-  variables:
-    OPAM_PINS: "coq version 8.14.1"
-    DENY_WARNINGS: "1"
-
 trigger-iris.dev:
   <<: *template
   variables:
