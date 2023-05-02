@@ -8,7 +8,7 @@ dev-repo: "git+https://gitlab.mpi-sws.org/iris/tutorial-popl20.git"
 synopsis: "The Iris tutorial at POPL 2020"
 
 depends: [
-  "coq-iris-heap-lang" { (= "dev.2023-03-09.0.f91e8eab") | (= "dev") }
+  "coq-iris-heap-lang" { (= "dev.2023-05-02.4.943e9b74") | (= "dev") }
 ]
 
 build: [make "-j%{jobs}%"]

@@ -14,7 +14,7 @@ generic mechanism for ghost state. These resources satisfy the following laws:
 >>
 *)
 
-Class symbolG Σ := { symbol_inG :> inG Σ (authR max_natUR) }.
+Class symbolG Σ := { symbol_inG :: inG Σ (authR max_natUR) }.
 Definition symbolΣ : gFunctors := #[GFunctor (authR max_natUR)].
 
 Global Instance subG_symbolΣ {Σ} : subG symbolΣ Σ → symbolG Σ.
@@ -61,4 +61,4 @@ Section symbol_ghost.
   Qed.
 End symbol_ghost.
 
-Typeclasses Opaque counter symbol.
+Global Typeclasses Opaque counter symbol.
