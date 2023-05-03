@@ -44,13 +44,13 @@ Section symbol_ghost.
 
   Lemma counter_exclusive γ n1 n2 : counter γ n1 -∗ counter γ n2 -∗ False.
   Proof.
-    apply bi.wand_intro_r. rewrite -own_op own_valid /=. by iDestruct 1 as %[].
+    apply bi.entails_wand, bi.wand_intro_r. rewrite -own_op own_valid /=. by iDestruct 1 as %[].
   Qed.
 
   Lemma counter_inc γ n : counter γ n ==∗ counter γ (S n) ∗ symbol γ n.
   Proof.
     rewrite -own_op.
-    apply own_update, auth_update_alloc, max_nat_local_update.
+    apply bi.entails_wand, own_update, auth_update_alloc, max_nat_local_update.
     simpl. lia.
   Qed.
 

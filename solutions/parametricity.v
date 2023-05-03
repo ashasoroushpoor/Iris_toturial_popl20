@@ -102,7 +102,7 @@ Section parametricity.
     intros He.
     apply (sem_gen_type_safety _ _ φ)=> ?.
     set (T := SemTy (λ w, ⌜ φ w ⌝)%I : sem_ty Σ).
-    exists T. split; first done.
+    exists T. split; first by auto.
     specialize (He _) as (Φ & He & Hvf & Hvz & Hφ).
     iIntros (vs) "!# #Hvs".
     iPoseProof (He with "Hvs") as "He /=".
