@@ -1,6 +1,6 @@
 -Q solutions solutions
 -Q exercises exercises
-INSTALLDEFAULTROOT = tutorial-popl20
+-docroot tutorial-popl20
 
 solutions/language.v
 solutions/polymorphism.v
