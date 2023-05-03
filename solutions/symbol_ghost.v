@@ -14,7 +14,8 @@ generic mechanism for ghost state. These resources satisfy the following laws:
 >>
 *)
 
-Class symbolG Σ := { symbol_inG :: inG Σ (authR max_natUR) }.
+Class symbolG Σ := { symbol_inG : inG Σ (authR max_natUR) }.
+Local Existing Instance symbol_inG.
 Definition symbolΣ : gFunctors := #[GFunctor (authR max_natUR)].
 
 Global Instance subG_symbolΣ {Σ} : subG symbolΣ Σ → symbolG Σ.

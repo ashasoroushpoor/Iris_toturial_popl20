@@ -14,7 +14,8 @@ following laws:
 >>
 *)
 
-Class two_stateG Σ := { two_state_inG :: inG Σ (authR (optionUR unitR)) }.
+Class two_stateG Σ := { two_state_inG : inG Σ (authR (optionUR unitR)) }.
+Local Existing Instance two_state_inG.
 Definition two_stateΣ : gFunctors := #[GFunctor (authR (optionUR unitR))].
 
 Global Instance subG_two_stateΣ {Σ} : subG two_stateΣ Σ → two_stateG Σ.
