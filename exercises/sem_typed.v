@@ -91,7 +91,7 @@ Section sem_typed.
   Qed.
 
   Lemma env_sem_typed_empty : ⊢ env_sem_typed ∅ ∅.
-  Proof. iIntros "". by rewrite /env_sem_typed. Qed.
+  Proof. iStartProof. by rewrite /env_sem_typed. Qed.
   Lemma env_sem_typed_empty_l_inv vs : env_sem_typed ∅ vs -∗ ⌜vs = ∅⌝.
   Proof. by iIntros "?"; iApply big_sepM2_empty_r. Qed.
 End sem_typed.
