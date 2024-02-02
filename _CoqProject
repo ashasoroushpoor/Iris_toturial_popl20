@@ -1,6 +1,8 @@
 -Q solutions solutions
 -Q exercises exercises
 -docroot tutorial-popl20
+# Fixing this one requires Coq 8.19
+-arg -w -arg -argument-scope-delimiter
 
 solutions/language.v
 solutions/polymorphism.v
