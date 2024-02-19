@@ -2,7 +2,7 @@
 
 This tutorial shows how Iris can be used to prove type soundness.
 An introduction to proving type soundness using Iris can be found in Derek Dreyer's [POPL'18 keynote](https://www.youtube.com/watch?v=8Xyk_dGcAwk),
-and an extensive description can be found in the paper [A Logical Approach to Type Soundness paper](https://iris-project.org/pdfs/2022-submitted-logical-type-soundness.pdf) by Amin Timany, Robbert Krebbers, Derek Dreyer, and Lars Birkedal.
+and an extensive description can be found in the paper [A Logical Approach to Type Soundness paper](https://iris-project.org/pdfs/2024-submitted-logical-type-soundness.pdf) by Amin Timany, Robbert Krebbers, Derek Dreyer, and Lars Birkedal.
 
 This tutorial comes in two versions:
 
